@@ -17,6 +17,7 @@ base_url = ''
 base_url = comp_mirrors[0] if !comp_mirrors.empty?
 # Search for cloud mirror if no mirrors added
 if base_url.empty?
+  node.set[:elasticsearch][:repository]    = "elasticsearch/elasticsearch”
   cloud_mirrors = JSON.parse(node[:workorder][:services][:mirror][@cloud_name][:ciAttributes][:mirrors])
   base_url = cloud_mirrors[@cookbook_name] if !cloud_mirrors.nil? && cloud_mirrors.has_key?(@cookbook_name)
 end
